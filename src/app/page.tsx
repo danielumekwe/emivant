@@ -209,14 +209,14 @@ export default function Home() {
               key={post.title}
               className="overflow-hidden rounded-card bg-white shadow-card"
             >
-              <div className="relative h-48 bg-[var(--color-section-bg)]">
+              <Link href={post.href} className="relative block h-48">
                 <Image
                   src={post.image.src}
                   alt={post.image.alt}
                   fill
-                  className="object-contain p-8"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
                 />
-              </div>
+              </Link>
               <div className="p-6">
                 <h5>{post.title}</h5>
                 <p className="mt-2 text-sm text-muted">{post.excerpt}</p>

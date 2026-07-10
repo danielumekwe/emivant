@@ -192,24 +192,33 @@ export const blogHeading = {
 
 export const blogPosts = [
   {
-    image: { src: "/images/feature-tutoring.png", alt: "Student studying online" },
+    image: {
+      src: "/images/blog/online-learning-tips.jpg",
+      alt: "Student typing on a laptop",
+    },
     title: "5 Tips for Effective Online Learning",
     excerpt:
       "Simple habits that help students stay focused, organized, and motivated in a virtual classroom.",
-    href: "/blog",
+    href: "https://blog.emivant.com.ng",
   },
   {
-    image: { src: "/images/feature-assessment.png", alt: "Student preparing for exams" },
+    image: {
+      src: "/images/blog/waec-neco-prep.jpg",
+      alt: "Student revising with books, a laptop and a planner",
+    },
     title: "How to Prepare for WAEC and NECO",
     excerpt:
       "A practical revision plan for exam season, from past questions to time management on the day.",
-    href: "/blog",
+    href: "https://blog.emivant.com.ng",
   },
   {
-    image: { src: "/images/feature-results.png", alt: "Tutor and student one-on-one" },
+    image: {
+      src: "/images/blog/one-on-one-tutoring-benefits.jpg",
+      alt: "Tutor and student reviewing a lesson together on a laptop",
+    },
     title: "The Benefits of One-on-One Tutoring",
     excerpt:
       "Why personalized attention helps students grasp difficult concepts faster than group classes alone.",
-    href: "/blog",
+    href: "https://blog.emivant.com.ng",
   },
 ];
