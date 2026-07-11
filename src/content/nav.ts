@@ -25,7 +25,7 @@ export const mainNav: NavItem[] = [
   { label: "Gallery", href: "/gallery" },
   { label: "Testimonials", href: "/#testimonials" },
   { label: "Contact Us", href: "/contact-us" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "https://blog.emivant.com.ng" },
 ];
 
 // footer3 widget (nav_menu-1) reuses the main menu under the title
@@ -35,6 +35,6 @@ export const footerNav: NavItem[] = mainNav;
 // wp9p_terms term_id=66 ("Copyright Menu"), assigned to sidebars_widgets
 // "copy_right" via widget_nav_menu instance 2.
 export const copyrightNav: NavItem[] = [
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "https://blog.emivant.com.ng" },
   { label: "Contact Us", href: "/contact-us" },
 ];
