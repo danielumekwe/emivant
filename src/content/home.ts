@@ -29,21 +29,35 @@ export const heroSlides = [
   },
 ];
 
-export const features = [
+export const features: {
+  icon: IconName;
+  image: string;
+  title: string;
+  text: string;
+}[] = [
   {
-    image: "/images/feature-tutoring.png",
+    icon: "video",
+    image: "/images/blog/online-learning-tips.jpg",
     title: "Online Tutoring",
     text: "Engaging and interactive teaching",
   },
   {
-    image: "/images/feature-assessment.png",
+    icon: "board",
+    image: "/images/services/online-grade-level-test.jpg",
     title: "Online Assessment",
     text: "Reliable and transparent evaluation",
   },
   {
-    image: "/images/feature-results.png",
+    icon: "gradCap",
+    image: "/images/feature-online-results.jpg",
     title: "Online Results",
     text: "Seamless and timely grading",
+  },
+  {
+    icon: "school",
+    image: "/images/services/group-learning-sessions.jpg",
+    title: "Online Class",
+    text: "Live, interactive lessons from anywhere",
   },
 ];
 
@@ -55,7 +69,7 @@ export const welcomeSection = {
   cta: { text: "Learn More", href: "/about-us" },
 };
 
-export const servicesHeading = "Our Services";
+export const servicesHeading = "Emivant Educational and Technology Services Ltd";
 
 export const services: {
   slug: string;
@@ -200,6 +214,7 @@ export const blogPosts = [
     excerpt:
       "Simple habits that help students stay focused, organized, and motivated in a virtual classroom.",
     href: "https://blog.emivant.com.ng",
+    date: "June 18, 2026",
   },
   {
     image: {
@@ -210,6 +225,7 @@ export const blogPosts = [
     excerpt:
       "A practical revision plan for exam season, from past questions to time management on the day.",
     href: "https://blog.emivant.com.ng",
+    date: "June 5, 2026",
   },
   {
     image: {
@@ -220,5 +236,6 @@ export const blogPosts = [
     excerpt:
       "Why personalized attention helps students grasp difficult concepts faster than group classes alone.",
     href: "https://blog.emivant.com.ng",
+    date: "May 22, 2026",
   },
 ];

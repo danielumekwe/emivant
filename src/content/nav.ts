@@ -1,3 +1,4 @@
+import { services } from "./home";
 import type { NavItem } from "./types";
 
 // Source: wp9p_terms term_id=73 ("main_menu"), the menu actually assigned
@@ -13,7 +14,14 @@ import type { NavItem } from "./types";
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
-  { label: "Our Services", href: "/our-services" },
+  {
+    label: "Our Services",
+    href: "/our-services",
+    children: services.map((service) => ({
+      label: service.title,
+      href: `/our-services#${service.slug}`,
+    })),
+  },
   { label: "Gallery", href: "/gallery" },
   { label: "Testimonials", href: "/#testimonials" },
   { label: "Contact Us", href: "/contact-us" },

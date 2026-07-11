@@ -24,7 +24,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const slide = slides[index];
 
   return (
-    <div className="relative h-[560px] overflow-hidden sm:h-[680px]">
+    <div className="relative h-[630px] overflow-hidden sm:h-[750px]">
       {slides.map((s, i) => (
         <Image
           key={s.image.src}

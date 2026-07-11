@@ -36,15 +36,41 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-8 sm:flex">
-          {mainNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-semibold tracking-wide uppercase hover:text-orange"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {mainNav.map((item) =>
+            item.children ? (
+              <div key={item.href} className="group relative">
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-1 text-sm font-semibold tracking-wide uppercase hover:text-orange"
+                >
+                  {item.label}
+                  <ChevronDownIcon className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
+                </Link>
+                <div className="invisible absolute top-full left-1/2 z-50 w-64 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <ul className="overflow-hidden rounded-card bg-white py-2 text-heading shadow-card">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className="block px-5 py-2.5 text-sm font-medium normal-case hover:bg-[var(--color-section-bg)] hover:text-orange"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-semibold tracking-wide uppercase hover:text-orange"
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="flex items-center gap-5">
@@ -117,6 +143,23 @@ function SearchIcon() {
     >
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.3-4.3" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }

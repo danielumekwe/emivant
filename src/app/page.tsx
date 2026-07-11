@@ -4,7 +4,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import HeroSlider from "@/components/HeroSlider";
 import ServiceIcon from "@/components/ServiceIcon";
 import TestimonialSlider from "@/components/TestimonialSlider";
-import { testimonials } from "@/content/about";
+import { stats, testimonials } from "@/content/about";
 import {
   blogHeading,
   blogPosts,
@@ -24,80 +24,148 @@ export default function Home() {
       <div className="relative">
         <HeroSlider slides={heroSlides} />
 
-        {/* Feature cards overlap the bottom edge of the slider — matches
-            the real page (a separate Elementor section with -200px top
-            margin layered on top of the RevSlider). */}
-        <div className="absolute inset-x-0 -bottom-16 z-10 hidden sm:block">
-          <div className="container-site grid grid-cols-3 gap-6">
-            {features.map((f) => (
+        {/* Feature tiles overlap the bottom edge of the slider — full-bleed
+            photo bands with an orange tint, matching the "Popular
+            Categories" style reference rather than the old dark cards. */}
+        <div className="absolute inset-x-0 -bottom-16 z-10 hidden sm:grid sm:grid-cols-4">
+          {features.map((f, i) => (
+            <div
+              key={f.title}
+              className="group relative h-56 overflow-hidden"
+            >
+              <Image
+                src={f.image}
+                alt={f.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
               <div
-                key={f.title}
-                className="flex items-center gap-4 rounded-card bg-navy p-5 shadow-card"
-              >
-                <Image
-                  src={f.image}
-                  alt={f.title}
-                  width={44}
-                  height={44}
-                  className="shrink-0"
+                className={`absolute inset-0 transition-colors duration-500 ${
+                  i % 2 === 0
+                    ? "bg-navy/70 group-hover:bg-navy/85"
+                    : "bg-orange/60 group-hover:bg-orange/75"
+                }`}
+              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center">
+                <ServiceIcon
+                  icon={f.icon}
+                  className="h-11 w-11 rounded-full border-2 border-white p-2 text-white transition-transform duration-500 group-hover:scale-110"
                 />
                 <div>
                   <h4 className="text-base text-white">{f.title}</h4>
-                  <p className="mt-1 text-xs text-white/70 italic">
+                  <p className="mt-1 text-xs text-white/80 italic">
                     {f.text}
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
       <div className="h-16 sm:h-24" />
 
-      {/* Same feature cards, stacked in normal flow for small screens
+      {/* Same feature tiles, stacked in normal flow for small screens
           where the absolute overlap above is hidden */}
-      <div className="container-site -mt-8 mb-8 grid grid-cols-1 gap-4 sm:hidden">
-        {features.map((f) => (
-          <div
-            key={f.title}
-            className="flex items-center gap-4 rounded-card bg-navy p-5 shadow-card"
-          >
+      <div className="-mt-8 mb-8 grid grid-cols-1 sm:hidden">
+        {features.map((f, i) => (
+          <div key={f.title} className="group relative h-40 overflow-hidden">
             <Image
               src={f.image}
               alt={f.title}
-              width={44}
-              height={44}
-              className="shrink-0"
+              fill
+              className="object-cover"
             />
-            <div>
-              <h4 className="text-base text-white">{f.title}</h4>
-              <p className="mt-1 text-xs text-white/70 italic">{f.text}</p>
+            <div
+              className={`absolute inset-0 ${
+                i % 2 === 0 ? "bg-navy/70" : "bg-orange/60"
+              }`}
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 text-center">
+              <ServiceIcon
+                icon={f.icon}
+                className="h-10 w-10 rounded-full border-2 border-white p-2 text-white"
+              />
+              <div>
+                <h4 className="text-base text-white">{f.title}</h4>
+                <p className="mt-1 text-xs text-white/80 italic">{f.text}</p>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
       {/* Welcome */}
-      <section className="container-site py-16 text-center">
-        <span className="text-sm font-bold tracking-wide text-orange uppercase">
-          {welcomeSection.eyebrow}
-        </span>
-        <h2 className="mt-2">{welcomeSection.heading}</h2>
-        <p className="mx-auto mt-6 max-w-3xl text-muted">
-          {welcomeSection.paragraph}
-        </p>
-        <Link href={welcomeSection.cta.href} className="btn-readon mt-8 inline-block">
-          {welcomeSection.cta.text}
-        </Link>
+      <section className="container-site py-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div
+            className="relative flex flex-col justify-center overflow-hidden rounded-card bg-navy p-10 sm:p-12"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)",
+              backgroundSize: "18px 18px",
+            }}
+          >
+            <span className="text-sm font-bold tracking-wide text-orange uppercase">
+              {welcomeSection.eyebrow}
+            </span>
+            <h2 className="mt-2 text-white">{welcomeSection.heading}</h2>
+            <p className="mt-6 text-white/70">{welcomeSection.paragraph}</p>
+            <Link
+              href={welcomeSection.cta.href}
+              className="mt-8 inline-block w-fit bg-orange px-8 py-3 text-sm font-semibold tracking-wide text-white uppercase"
+            >
+              {welcomeSection.cta.text}
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="relative aspect-square overflow-hidden rounded-card shadow-card">
+                <Image
+                  src="/images/founder-segun.jpg"
+                  alt="Mr. Segun Oladele"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative aspect-square overflow-hidden rounded-card shadow-card">
+                <Image
+                  src="/images/gallery/emivant.png"
+                  alt="Student learning online"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-6">
+              {stats.slice(1).map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-card bg-navy p-6 text-center"
+                >
+                  <div className="text-3xl font-extrabold text-orange">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-white">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Services */}
-      <section id="services" className="container-site py-16 text-center">
+      <section
+        id="services"
+        className="bg-[var(--color-section-bg)] px-6 py-16 text-center lg:px-12"
+      >
         <span className="text-sm font-bold tracking-wide text-orange uppercase">
-          Top Categories
+          What we Offer?
         </span>
         <h2 className="mt-2">{servicesHeading}</h2>
-        <div className="mt-10 grid grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => (
             <Link
               key={service.title}

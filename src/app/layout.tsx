@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito, Rubik } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { blogPosts } from "@/content/home";
 import "./globals.css";
 
 // Matches the original Educavo theme's Google Fonts weight sets exactly
@@ -33,7 +34,14 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        <Footer />
+        <Footer
+          recentPosts={blogPosts.map((post) => ({
+            title: post.title,
+            href: post.href,
+            date: post.date,
+            featuredImage: post.image.src,
+          }))}
+        />
       </body>
     </html>
   );
