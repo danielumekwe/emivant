@@ -5,38 +5,20 @@ export interface GalleryImage {
   alt: string;
 }
 
+export interface GalleryVideo {
+  id: string;
+  title: string;
+}
+
 export const galleryHero = {
   title: "Gallery",
   image: { src: "/images/gallery-hero.jpg", alt: "Emivant gallery" },
 };
 
 // Source: wp9p_postmeta post_id=3089 (_elementor_data, image-gallery
-// widget, 8 images, 3-column masonry, lightbox enabled).
+// widget, 3-column masonry, lightbox enabled). Originally 8 images; the 4
+// generic stock/promo photos were dropped in favor of the Videos tab.
 export const galleryImages: GalleryImage[] = [
-  {
-    src: "/images/gallery/gallery_12.jpg",
-    width: 1240,
-    height: 700,
-    alt: "Emivant gallery photo",
-  },
-  {
-    src: "/images/gallery/emivant.png",
-    width: 1024,
-    height: 1024,
-    alt: "Emivant brand image",
-  },
-  {
-    src: "/images/gallery/ChatGPT-Image-Jun-23-2025-09_03_31-PM.png",
-    width: 1536,
-    height: 1024,
-    alt: "Emivant promotional graphic",
-  },
-  {
-    src: "/images/gallery/ChatGPT-Image-Jun-23-2025-08_53_24-PM.png",
-    width: 1024,
-    height: 1024,
-    alt: "Emivant promotional graphic",
-  },
   {
     src: "/images/gallery/ddff-731x1024-1.png",
     width: 731,
@@ -60,5 +42,22 @@ export const galleryImages: GalleryImage[] = [
     width: 696,
     height: 497,
     alt: "Emivant website capture",
+  },
+];
+
+// Titles fetched from each video's YouTube oEmbed metadata (channel:
+// Segun Oladele / Mathematics_Online_Tutor).
+export const galleryVideos: GalleryVideo[] = [
+  { id: "R3A7kiPNC88", title: "SAMPLE" },
+  { id: "REECk_Ssbys", title: "PIE CHART Emivant Online School" },
+  { id: "NR1sHgxEwAI", title: "Angles and Bearing" },
+  {
+    id: "l51RcpAWiVI",
+    title:
+      "JSS 3 BECE Mathematics Past Questions Solved | Exam Preparation with Students",
+  },
+  {
+    id: "JjNodcQvS6k",
+    title: "MATH AND BASIC SCIENCE BECE 2026 Past Questions",
   },
 ];

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import GalleryGrid from "@/components/GalleryGrid";
+import GalleryTabs from "@/components/GalleryTabs";
 import PageHero from "@/components/PageHero";
-import { galleryHero, galleryImages } from "@/content/gallery";
+import { galleryHero, galleryImages, galleryVideos } from "@/content/gallery";
 
 export const metadata: Metadata = {
   title: "Gallery | Emivant Interactive Virtual School",
@@ -13,7 +13,7 @@ export default function GalleryPage() {
       <PageHero title={galleryHero.title} image={galleryHero.image} />
 
       <section className="container-site py-16">
-        <GalleryGrid images={galleryImages} />
+        <GalleryTabs images={galleryImages} videos={galleryVideos} />
       </section>
     </>
   );
