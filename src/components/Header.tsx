@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { mainNav } from "@/content/nav";
@@ -8,6 +11,8 @@ import { site } from "@/content/site";
 // inner pages) — matches the rendered theme, which floats the header over
 // the hero rather than stacking a separate solid bar above it.
 export default function Header() {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
   return (
     <header className="absolute inset-x-0 top-0 z-50 text-white">
       <div className="border-b border-white/15 bg-navy/40">
@@ -84,14 +89,61 @@ export default function Header() {
           <button
             type="button"
             aria-label="Menu"
+            aria-expanded={mobileNavOpen}
+            onClick={() => setMobileNavOpen((open) => !open)}
             className="flex flex-col gap-1.5 sm:hidden"
           >
-            <span className="block h-0.5 w-6 bg-white" />
-            <span className="block h-0.5 w-6 bg-white" />
-            <span className="block h-0.5 w-6 bg-white" />
+            <span
+              className={`block h-0.5 w-6 bg-white transition-transform duration-200 ${
+                mobileNavOpen ? "translate-y-2 rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-white transition-opacity duration-200 ${
+                mobileNavOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-white transition-transform duration-200 ${
+                mobileNavOpen ? "-translate-y-2 -rotate-45" : ""
+              }`}
+            />
           </button>
         </div>
       </div>
+
+      {mobileNavOpen && (
+        <nav className="border-t border-white/15 bg-navy sm:hidden">
+          <ul className="container-site flex flex-col py-4">
+            {mainNav.map((item) => (
+              <li key={item.href} className="py-2">
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileNavOpen(false)}
+                  className="block text-sm font-semibold tracking-wide uppercase hover:text-orange"
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <ul className="mt-2 flex flex-col gap-2 pl-4">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={() => setMobileNavOpen(false)}
+                          className="block text-sm font-medium normal-case text-white/80 hover:text-orange"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }
