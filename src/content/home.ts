@@ -195,16 +195,16 @@ export const testimonialsHeading = {
   title: "What Students Saying",
 };
 
-// Sample/placeholder cards — the real blog listing (see
-// src/app/blog/page.tsx) is intentionally empty pending the real posts
-// from the July 2025 WXR export. These are illustrative only, styled
-// with existing site imagery, until that content lands.
 export const blogHeading = {
   eyebrow: "Our Blog",
   title: "From the Blog",
 };
 
-export const blogPosts = [
+// Fallback only — used when the live fetch from blog.emivant.com.ng
+// (see src/content/blog-feed.ts) fails or returns no posts. The Blogger
+// posts carry no featured image, so these local photos also double as
+// the fallback imagery cycled across live posts.
+export const placeholderBlogPosts = [
   {
     image: {
       src: "/images/blog/online-learning-tips.jpg",

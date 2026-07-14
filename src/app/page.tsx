@@ -5,9 +5,9 @@ import HeroSlider from "@/components/HeroSlider";
 import ServiceIcon from "@/components/ServiceIcon";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import { stats, testimonials } from "@/content/about";
+import { getLatestBlogPosts } from "@/content/blog-feed";
 import {
   blogHeading,
-  blogPosts,
   faqSection,
   features,
   heroSlides,
@@ -18,7 +18,8 @@ import {
   whoWeAre,
 } from "@/content/home";
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = await getLatestBlogPosts(3);
   return (
     <div className="flex flex-col">
       <div className="relative">

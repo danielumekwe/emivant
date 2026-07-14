@@ -33,6 +33,14 @@ export interface BlogPostSummary {
   featuredImage?: string;
 }
 
+export interface BlogTeaserPost {
+  image: { src: string; alt: string };
+  title: string;
+  excerpt: string;
+  href: string;
+  date: string;
+}
+
 export type IconName =
   | "video"
   | "school"

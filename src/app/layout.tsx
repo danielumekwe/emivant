@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nunito, Rubik } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { blogPosts } from "@/content/home";
+import { getLatestBlogPosts } from "@/content/blog-feed";
 import "./globals.css";
 
 // Matches the original Educavo theme's Google Fonts weight sets exactly
@@ -24,11 +24,13 @@ export const metadata: Metadata = {
   description: "Integrity, Innovation and Creativity",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const blogPosts = await getLatestBlogPosts(3);
+
   return (
     <html lang="en" className={`${nunito.variable} ${rubik.variable}`}>
       <body>
