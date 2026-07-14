@@ -12,6 +12,7 @@ import { site } from "@/content/site";
 // the hero rather than stacking a separate solid bar above it.
 export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 text-white">
@@ -90,7 +91,12 @@ export default function Header() {
             type="button"
             aria-label="Menu"
             aria-expanded={mobileNavOpen}
-            onClick={() => setMobileNavOpen((open) => !open)}
+            onClick={() =>
+              setMobileNavOpen((open) => {
+                if (open) setOpenSubmenu(null);
+                return !open;
+              })
+            }
             className="flex flex-col gap-1.5 sm:hidden"
           >
             <span
@@ -115,32 +121,62 @@ export default function Header() {
       {mobileNavOpen && (
         <nav className="border-t border-white/15 bg-navy sm:hidden">
           <ul className="container-site flex flex-col py-4">
-            {mainNav.map((item) => (
-              <li key={item.href} className="py-2">
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileNavOpen(false)}
-                  className="block text-sm font-semibold tracking-wide uppercase hover:text-orange"
-                >
-                  {item.label}
-                </Link>
-                {item.children && (
-                  <ul className="mt-2 flex flex-col gap-2 pl-4">
-                    {item.children.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          href={child.href}
-                          onClick={() => setMobileNavOpen(false)}
-                          className="block text-sm font-medium normal-case text-white/80 hover:text-orange"
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+            {mainNav.map((item) => {
+              const isSubmenuOpen = openSubmenu === item.href;
+              return (
+                <li key={item.href} className="py-2">
+                  {item.children ? (
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={item.href}
+                        onClick={() => setMobileNavOpen(false)}
+                        className="text-sm font-semibold tracking-wide uppercase hover:text-orange"
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        aria-label={`Toggle ${item.label} submenu`}
+                        aria-expanded={isSubmenuOpen}
+                        onClick={() =>
+                          setOpenSubmenu(isSubmenuOpen ? null : item.href)
+                        }
+                        className="p-2"
+                      >
+                        <ChevronDownIcon
+                          className={`h-3 w-3 transition-transform duration-200 ${
+                            isSubmenuOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileNavOpen(false)}
+                      className="block text-sm font-semibold tracking-wide uppercase hover:text-orange"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                  {item.children && isSubmenuOpen && (
+                    <ul className="mt-2 flex flex-col gap-2 pl-4">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            onClick={() => setMobileNavOpen(false)}
+                            className="block text-sm font-medium normal-case text-white/80 hover:text-orange"
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
       )}
